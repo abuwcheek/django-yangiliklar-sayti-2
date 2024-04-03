@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+category page
+{% endblock title %}
+
+
+{% block menu %}
+    <a href="{% url 'home:home' %}" class="nav-item nav-link ">Home</a>
+    {% for category in kategoriyalar %}
+        <a href="{% url 'home:category' category.slug %}" class="nav-item nav-link {% if category.id == ctg.id %} active {% endif %}">{{ category.name }}</a>
+    {% endfor %}
+
+    <a href="{% url 'home:contact' %}" class="nav-item nav-link">Contact Us</a>
+{% endblock menu %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="container">
+    <ol class="breadcrumb justify-content-start mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
+        <!-- <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
+        <li class="breadcrumb-item active text-dark">Category list</li>
+    </ol>
+    <br>
+    <h1> {{ ctg.name }} - Categoriyasi</h1>
+
+    <br>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {% for new in news_list %}
+
+        <div class="container">
+            <a href="{% url 'home:detail' new.slug %}">
+                <p>{{ new.title }}</p>
+                <img src="{{ new.image.url }}" alt="image" style="width: 700px; height: 500px;">
+            </a>
+            <h6>{{ new.created_at|date:'d-m-Y H:i' }}</h6>
+            <h6><i class="fa fa-eye"></i>Views: {{ new.views }}</h6>
+        </div>
+        <br>
+        <hr>
+        <br>
+
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

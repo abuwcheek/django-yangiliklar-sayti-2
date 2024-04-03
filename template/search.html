@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+search page
+{% endblock title %}
+
+
+{% block menu %}
+    <a href="{% url 'home:home' %}" class="nav-item nav-link  ">Home</a>
+    {% for category in kategoriyalar %}
+        <a href="{% url 'home:category' category.slug %}" class="nav-item nav-link" >{{ category.name }}</a>
+    {% endfor %}
+
+    <a href="{% url 'home:contact' %}" class="nav-item nav-link">Contact Us</a>
+{% endblock menu %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <br>
+    <br>
+
+    <ol class="breadcrumb justify-content-start mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
+        <li class="breadcrumb-item active text-dark">Search Page</li>
+    </ol>
+    <br>
+    
+    <h1><b>Search results</b></h1>
+    <br>
+    <hr>
+    <br>
+</div>
+    
+
+{% for yangi in searchnews %}
+
+    <div class="container">
+        <a href="{% url 'home:detail' yangi.slug %}">
+            <h3><b>{{ yangi.title }}</b></h3>
+            <img src="{{ yangi.image.url }}" alt="image" style="width: 700px; height: 500px;">
+        </a>
+        <b><p>Date: {{ yangi.created_at|date:'d-m-Y H:i' }} | Views: {{ yangi.views }}</p></b>
+        <hr>
+        <br>
+        <br>
+    </div>
+
+{% endfor %}
+
+{% endblock content %}

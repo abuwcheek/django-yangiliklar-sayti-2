@@ -1,0 +1,867 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+home page
+{% endblock title %}
+
+
+{% block menu %}
+    <a href="{% url 'home:home' %}" class="nav-item nav-link active">Home</a>
+    {% for category in kategoriyalar %}
+        <a href="{% url 'home:category' category.slug %}" class="nav-item nav-link">{{ category.name }}</a>
+    {% endfor %}
+
+    <a href="{% url 'home:contact' %}" class="nav-item nav-link">Contact Us</a>
+{% endblock menu %}
+
+
+{% block content %}
+
+    <!-- Features Start -->
+    <div class="container-fluid features mb-5">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="row g-4 align-items-center features-item">
+                        {% for sport in sport_news %}
+                            {% if forloop.counter == 1 %}
+                                <div class="col-4">
+                                    <div class="rounded-circle position-relative">
+                                        <div class="overflow-hidden rounded-circle">
+                                            <img src="{{ sport.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="image">
+                                        </div>
+                                        <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ sport.views }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="features-content d-flex flex-column">
+                                        <p class="text-uppercase mb-2">Sport</p>
+                                        <a href="{% url 'home:detail' sport.slug %}" class="h6">
+                                            {{ sport.title }}
+                                        </a>
+                                        <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>Date: {{ sport.created_at|date:'d-m-Y H:i' }}</small>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="row g-4 align-items-center features-item">
+                        {% for texnologiy in texnologiy_news %}
+                            {% if forloop.counter == 1 %}
+                                <div class="col-4">
+                                    <div class="rounded-circle position-relative">
+                                        <div class="overflow-hidden rounded-circle">
+                                            <img src="{{ texnologiy.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                        </div>
+                                        <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ texnologiy.views }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="features-content d-flex flex-column">
+                                        <p class="text-uppercase mb-2">Texnologiya</p>
+                                        <a href="{% url 'home:detail' texnologiy.slug %}" class="h6">
+                                            {{ texnologiy.title }}
+                                        </a>
+                                        <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>Date: {{ texnologiy.created_at|date:'d-m-Y H:i' }}</small>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="row g-4 align-items-center features-item">
+                        {% for moda in moda_news %}
+                            {% if forloop.counter == 1 %}
+                                <div class="col-4">
+                                    <div class="rounded-circle position-relative">
+                                        <div class="overflow-hidden rounded-circle">
+                                            <img src="{{ moda.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                        </div>
+                                        <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ moda.views }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="features-content d-flex flex-column">
+                                        <p class="text-uppercase mb-2">Moda</p>
+                                        <a href="{% url 'home:detail' moda.slug %}" class="h6">
+                                            {{ moda.title }}
+                                        </a>
+                                        <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>Date: {{ moda.created_at|date:'d-m-Y H:i' }}</small>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="row g-4 align-items-center features-item">
+                        {% for day in day_news %}
+                            {% if forloop.counter == 1 %}
+                                <div class="col-4">
+                                    <div class="rounded-circle position-relative">
+                                        <div class="overflow-hidden rounded-circle">
+                                            <img src="{{ day.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                        </div>
+                                        <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ day.views }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="features-content d-flex flex-column">
+                                        <p class="text-uppercase mb-2">Kundalik yangilik</p>
+                                        <a href="{% url 'home:detail' day.slug %}" class="h6">
+                                            {{ day.title }}
+                                        </a>
+                                        <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>Date: {{ day.created_at|date:'d-m-Y H:i' }}</small>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+
+
+    <!-- Main Post Section Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row g-4">
+
+                <div class="col-lg-7 col-xl-8 mt-0">
+
+                    {% for last in lastest_news %}
+                        {% if forloop.counter == 1 %}
+
+                            <div class="position-relative overflow-hidden rounded">
+                                <img src="{{ last.image.url }}" class="img-fluid rounded img-zoomin w-100" alt="image">
+                                <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
+                                    <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>Date: {{ last.created_at|date:'d-m-Y H:i' }}</small>
+                                    <small><i class="fas fa-calendar-alt me-1"></i>Views: {{ last.views }}</small>
+                                </div>
+                            </div>
+                            <div class="border-bottom py-3">
+                                <a href="{% url 'home:detail' last.slug %}" class="display-6 text-dark mb-0 link-hover">{{ last.title }}</a>
+                            </div>
+                                                            
+                        {% endif %}
+                    {% endfor %}
+
+                    <br>
+                    <br>
+                    {% for most in most_news %}
+                        {% if forloop.counter == 1 %}
+                            <p class="mt-3 mb-4"><b>{{ most.body | safe |slice:"200" }}</b></p>
+                            <div class="bg-light p-4 rounded">
+                                <div class="news-2">
+                                    <h3 class="mb-4">Ko'p ko'rilganlar</h3>
+                                </div>
+                                <div class="row g-4 align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="rounded overflow-hidden">
+                                            <img src="{{ most.image.url }}" class="img-fluid rounded img-zoomin w-100" alt="image">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-column">
+                                            <a href="{% url 'home:detail' most.slug %}" class="h3">{{ most.title }}</a>
+                                            <h6><i class="fa fa-clock"></i>Date: {{ most.created_at|date:'d-m-Y H:i' }}</h6>
+                                            <h6><i class="fa fa-eye"></i>Views: {{ most.views }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                           
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="col-lg-5 col-xl-4">
+                    <div class="bg-light rounded p-4 pt-0">
+                        <div class="row g-4">
+                            {% for private in private_news %}
+                                {% if forloop.counter == 1 %}
+                                    <div class="col-12">
+                                        <div class="rounded overflow-hidden">
+                                            <img src="{{ private.image.url }}" class="img-fluid rounded img-zoomin w-100" alt="image">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="d-flex flex-column">
+                                            <a href="{% url 'home:detail' private.slug %}" class="h4 mb-2">{{ private.title }}</a>
+                                            <h6><i class="fa fa-clock"></i>Date: {{ private.created_at|date:'d-m-Y H:i' }}</h6>
+                                            <h6><i class="fa fa-eye"></i>Views: {{ private.views }}</h6>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for private in private_news %}
+                                {% if forloop.counter != 1 %}
+                                    <div class="col-12">
+                                        <div class="row g-4 align-items-center">
+                                            <div class="col-5">
+                                                <div class="overflow-hidden rounded">
+                                                    <img src="{{ private.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                </div>
+                                            </div>
+                                            <div class="col-7">
+                                                <div class="features-content d-flex flex-column">
+                                                    <a href="{% url 'home:detail' private.slug %}" class="h6">{{ private.title }}.</a>
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ private.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ private.views }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Post Section End -->
+
+
+    <!-- Banner Start -->
+    <div class="container-fluid py-5 my-5" style="background: linear-gradient(rgba(202, 203, 185, 1), rgba(202, 203, 185, 1));">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <h1 class="mb-4 text-primary">Newsers</h1>
+                    <h1 class="mb-4">Get Every Weekly Updates</h1>
+                    <p class="text-dark mb-4 pb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                    </p>
+                    <div class="position-relative mx-auto">
+                        <input class="form-control w-100 py-3 rounded-pill" type="email" placeholder="Your Busines Email">
+                        <button type="submit" class="btn btn-primary py-3 px-5 position-absolute rounded-pill text-white h-100" style="top: 0; right: 0;">Subscribe Now</button>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="rounded">
+                        <img src="{% static 'img/banner-img.jpg' %}" class="img-fluid rounded w-100 rounded" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+
+    <!-- Latest News Start -->
+    <div class="container-fluid latest-news py-5">
+        <div class="container py-5">
+            <h2 class="mb-4">Ko'p ko'rilganlar</h2>
+            <div class="latest-news-carousel owl-carousel">
+
+                {% for most in most_views %}
+                    <div class="latest-news-item">
+                        <div class="bg-light rounded">
+                            <div class="rounded-top overflow-hidden">
+                                <img src="{{ most.image.url }}" class="img-zoomin img-fluid rounded-top w-100" alt="">
+                            </div>
+                            <div class="flex-column">
+                                <a href="{% url 'home:detail' most.slug %}" class="h4">{{ most.title }}</a>
+                                <div class="justify-content-between p-3">
+                                    <h6><i class="fa fa-clock"></i>Date: {{ most.created_at|date:'d-m-Y H:i' }}</h6>
+                                    <h6><i class="fa fa-eye"></i>Views: {{ most.views }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+    <!-- Latest News End -->
+
+
+    <!-- Most Populer News Start -->
+    <div class="container-fluid populer-news py-5">
+        <div class="container py-5">
+            <div class="tab-class mb-4">
+                <div class="row g-4">
+                    <div class="col-lg-8 col-xl-9">
+
+                        <div class="d-flex flex-column flex-md-row justify-content-md-between border-bottom mb-4">
+                            <h1 class="mb-4">Kerakli yangiliklar</h1>
+
+                            <ul class="nav nav-pills d-inline-flex text-center">
+
+                                <li class="nav-item mb-3">
+                                    <a class="d-flex py-2 bg-light rounded-pill active me-2" data-bs-toggle="pill" href="#tab-1">
+                                        <span class="text-dark" style="width: 100px;">Sport</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item mb-3">
+                                    <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="#tab-2">
+                                        <span class="text-dark" style="width: 100px;">Magazin</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item mb-3">
+                                    <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="#tab-3">
+                                        <span class="text-dark" style="width: 100px;">Siyosat</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item mb-3">
+                                    <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="#tab-4">
+                                        <span class="text-dark" style="width: 100px;">Texnologiya</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item mb-3">
+                                    <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="#tab-5">
+                                        <span class="text-dark" style="width: 100px;">Moda</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        
+                        <!-- (forloop.counter), (sport)=>category  -->
+                        <div class="tab-content mb-4">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <div class="row g-4">
+
+                                    <div class="col-lg-8">
+
+                                        {% for sport in sport_news %}
+                                            {% if forloop.counter == 1 %}
+                                    
+                                                <div class="position-relative rounded overflow-hidden">
+                                                    <img src="{{ sport.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="">
+                                                    <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                                                        Sport
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="my-4">
+                                                    <a href="{% url 'home:detail' sport.slug %}" class="h4">{{ sport.title }}</a>
+                                                </div>
+                                                <p class="mt-4">{{ sport.body | safe |slice:"128" }}</p>
+                                                <div class="justify-content-between">
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ sport.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ sport.views }}</h6>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="row g-4">
+
+                                            {% for sport in sport_news %}
+                                                {% if forloop.counter != 1 %}
+                                        
+
+                                                    <div class="col-12">
+                                                        <div class="row g-4 align-items-center">
+                                                            <div class="col-5">
+                                                                <div class="overflow-hidden rounded">
+                                                                    <img src="{{ sport.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <div class="features-content d-flex flex-column">
+                                                                    <p class="text-uppercase mb-2">Sport</p>
+                                                                    <a href="{% url 'home:detail' sport.slug %}" class="h6">{{ sport.title }}</a>
+                                                                    <h6><i class="fa fa-clock" ></i>Date: {{ sport.created_at|date:'d-m-Y H:i' }}</h6>
+                                                                    <h6><i class="fa fa-eye"></i>Views: {{ sport.views }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            {% endfor %}         
+                                        </div>                                               
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- (forloop.counter), (magazin)=>category -->
+                            <div id="tab-2" class="tab-pane fade show p-0">
+                                <div class="row g-4">
+
+                                    {% for magazine in magazine_news %}
+                                        {% if forloop.counter == 1 %}
+                                            <div class="col-lg-8">
+                                                <div class="position-relative rounded overflow-hidden">
+                                                    <img src="{{ magazine.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                    <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                                                        Magazin
+                                                    </div>
+                                                </div>
+
+                                                <div class="my-3">
+                                                    <b><a href="{% url 'home:detail' magazine.slug %}" class="h4">{{ magazine.title }}</a></b>
+                                                </div>
+                                                <p class="mt-4">{{ magazine.body | safe |slice:"270" }}</p>
+                                                <div class="justify-content-between">
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ magazine.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ magazine.views }}</h6>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+                                    {% endfor %}                                                        
+
+                                    <div class="col-lg-4">
+                                        <div class="row g-4">
+
+                                            {% for magazine in magazine_news %}
+                                                {% if forloop.counter != 1 %}
+                                                    <div class="col-12">
+                                                        <div class="row g-4 align-items-center">
+                                                            <div class="col-5">
+                                                                <div class="overflow-hidden rounded">
+                                                                    <img src="{{ magazine.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <div class="features-content d-flex flex-column">
+                                                                    <p class="text-uppercase mb-2">Magazin</p>
+                                                                    <a href="{% url 'home:detail' magazine.slug %}" class="h6">{{ magazine.title }}</a>
+                                                                    <h6><i class="fa fa-clock"></i>Date: {{ magazine.created_at|date:'d-m-Y H:i' }}</h6>
+                                                                    <h6><i class="fa fa-eye"></i>Views: {{ magazine.views }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- (forloop.counter), (siyosat)=>category -->
+                            <div id="tab-3" class="tab-pane fade show p-0">
+                                <div class="row g-4">
+                                    {% for politic in politic_news %}
+                                        {% if forloop.counter == 1 %}
+
+                                            <div class="col-lg-8">
+                                                <div class="position-relative rounded overflow-hidden">
+                                                    <img src="{{ politic.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                    <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                                                        Siyosat
+                                                    </div>
+                                                </div>
+                                                <div class="my-3">
+                                                    <a href="{% url 'home:detail'  politic.slug %}" class="h4">{{ politic.title }}</a>
+                                                </div>
+                                                <p class="mt-4">{{ politic.body | safe |slice:"270" }}</p>
+                                                <div class="justify-content-between">
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ politic.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ politic.views }}</h6>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <div class="col-lg-4">
+                                        <div class="row g-4">
+                                            {% for politic in politic_news %}
+                                                {% if forloop.counter != 1 %}
+
+                                                    <div class="col-12">
+                                                        <div class="row g-4 align-items-center">
+                                                            <div class="col-5">
+                                                                <div class="overflow-hidden rounded">
+                                                                    <img src="{{ politic.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <div class="features-content d-flex flex-column">
+                                                                    <p class="text-uppercase mb-2">Siyosat</p>
+                                                                    <a href="{% url 'home:detail' politic.slug %}" class="h6">{{ politic.title }}</a>
+                                                                    <h6><i class="fa fa-clock"></i>Date: {{ politic.created_at|date:'d-m-Y H:i' }}</h6>
+                                                                    <h6><i class="fa fa-eye"></i>Views: {{ politic.views }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- (forloop.counter), (texnologiya)=>category -->
+                            <div id="tab-4" class="tab-pane fade show p-0">
+                                <div class="row g-4">
+                                    {% for texnologiy in texnologiy_news %}
+                                        {% if forloop.counter == 1 %}
+
+                                            <div class="col-lg-8">
+                                                <div class="position-relative rounded overflow-hidden">
+                                                    <img src="{{ texnologiy.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                    <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                                                        Texnologiya
+                                                    </div>
+                                                </div>
+                                                <div class="my-3">
+                                                    <a href="{% url 'home:detail' texnologiy.slug %}" class="h4">{{ texnologiy.title }}</a>
+                                                </div>
+                                                <p class="mt-4">{{ texnologiy.body | safe |slice:"270" }}</p>
+                                                <div class="justify-content-between">
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ texnologiy.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ texnologiy.views }}</h6>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <div class="col-lg-4">
+                                        <div class="row g-4">
+                                            {% for texnologiy in texnologiy_news %}
+                                                {% if forloop.counter != 1 %}
+
+                                                    <div class="col-12">
+                                                        <div class="row g-4 align-items-center">
+                                                            <div class="col-5">
+                                                                <div class="overflow-hidden rounded">
+                                                                    <img src="{{ texnologiy.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <div class="features-content d-flex flex-column">
+                                                                    <p class="text-uppercase mb-2">Texnologiya</p>
+                                                                    <a href="{% url 'home:detail' texnologiy.slug %}" class="h6">{{ texnologiy.title }}</a>
+                                                                    <h6><i class="fa fa-clock"></i>Date: {{ texnologiy.created_at|date:'d-m-Y H:i' }}</h6>
+                                                                    <h6><i class="fa fa-eye"></i>Views: {{ texnologiy.views }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- (forloop.counter), (moda)=>category -->
+                            <div id="tab-5" class="tab-pane fade show p-0">
+                                <div class="row g-4">
+                                    {% for moda in moda_news %}
+                                        {% if forloop.counter == 1 %}    
+                                    
+                                            <div class="col-lg-8">
+                                                <div class="position-relative rounded overflow-hidden">
+                                                    <img src="{{ moda.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                    <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                                                        Fashion
+                                                    </div>
+                                                </div>
+                                                <div class="my-3">
+                                                    <a href="{% url 'home:detail' moda.slug %}" class="h4">{{ moda.title }}</a>
+                                                </div>
+                                                <p class="mt-4">{{ moda.body | safe |slice:"200"}}</p>
+                                                <div class="justify-content-between">
+                                                    <h6><i class="fa fa-clock"></i>Date: {{ moda.created_at|date:'d-m-Y H:i' }}</h6>
+                                                    <h6><i class="fa fa-eye"></i>Views: {{ moda.views }}</h6>                                                     
+                                                </div>
+                                            </div>     
+                                                                                
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="col-lg-4">
+                                        <div class="row g-4">
+                                            {% for moda in moda_news %}
+                                                {% if forloop.counter != 1 %} 
+
+                                                    <div class="col-12">
+                                                        <div class="row g-4 align-items-center">
+                                                            <div class="col-5">
+                                                                <div class="overflow-hidden rounded">
+                                                                    <img src="{{ moda.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="image">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-7">
+                                                                <div class="features-content d-flex flex-column">
+                                                                    <p class="text-uppercase mb-2">Moda</p>
+                                                                    <a href="{% url 'home:detail' moda.slug %}" class="h6">{{ moda.title }}</a>
+                                                                    <h6><i class="fa fa-clock"></i>Date: {{ moda.created_at|date:'d-m-Y H:i' }}</h6>
+                                                                    <h6><i class="fa fa-eye"></i>Views: {{ moda.views }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <hr>
+                        <br>
+                        <br>    
+                        <div class="border-bottom mb-4">
+                            <h2 class="my-4">Yaxshi yangiliklar</h2>
+                        </div>
+                        <!-- mashhur yangiliklar in for -->
+                        <div class="whats-carousel owl-carousel">
+                            {% for most in most_news %}
+                                <div class="latest-news-item">
+                                    <div class="bg-light rounded">
+                                        <div class="rounded-top overflow-hidden">
+                                            <img src="{{ most.image.url }}" class="img-zoomin img-fluid rounded-top w-100" alt="image">
+                                        </div>
+                                        <div>
+                                            <a href="{% url 'home:detail' most.slug %}" class="h4">{{ most.title }}</a>
+                                            <div class="justify-content-between p-3">
+                                                <h6><i class="fa fa-clock"></i>Date: {{ most.created_at|date:'d-m-Y H:i' }}</h6>
+                                                <h6><i class="fa fa-eye"></i>Views: {{ most.views }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}    
+                        </div>
+                        <br>
+                        <hr> 
+                        <br>
+                        <div class="mt-5 lifestyle">
+                            <div class="border-bottom mb-4">
+                                <h1 class="mb-4">Kundalik yangiliklar</h1>
+                            </div>
+                            <div class="row g-4">
+
+                                {% for day in day_news %}
+                                    <div class="col-lg-6">
+                                        <div class="lifestyle-item rounded">
+                                            <img src="{{ day.image.url }}" class="img-fluid w-100 rounded" alt="image">
+                                            <div class="lifestyle-content">
+                                                <div class="mt-auto">
+                                                    <a href="{% url 'home:detail' day.slug %}" class="h4 text-white link-hover">{{ day.title }}</a>
+                                                    <div class="justify-content-between mt-4">
+                                                        <a href="{% url 'home:detail' day.slug %}" class="h4 text-white link-hover">
+                                                            <h6><i class="fa fa-clock"></i>Date: {{ day.created_at|date:'d-m-Y H:i' }}</h6>                                                       
+                                                        </a>
+                                                        <a href="{% url 'home:detail' day.slug %}" class="h4 text-white link-hover">
+                                                            <h6><i class="fa fa-eye"></i>Views: {{ day.views }}</h6>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                
+                                <div class="p-3 rounded border">
+                                    <h4 class="mb-4">Ijtimoiy tarmoqlar</h4>
+                                    <div class="row g-4">
+                                        <div class="col-12">
+                                            <a href="{{ about.facebook }}" class="w-100 rounded btn btn-primary d-flex align-items-center p-3 mb-2">
+                                                <i class="fab fa-facebook-f btn btn-light btn-square rounded-circle me-3"></i>
+                                                <span class="text-white">13,977 Fans</span>
+                                            </a>
+                                            <a href="{{ about.twitter }}" class="w-100 rounded btn btn-danger d-flex align-items-center p-3 mb-2">
+                                                <i class="fab fa-twitter btn btn-light btn-square rounded-circle me-3"></i>
+                                                <span class="text-white">13,977 Follower</span>
+                                            </a>
+                                            <a href="{{ about.youtube }}" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-2">
+                                                <i class="fab fa-youtube btn btn-light btn-square rounded-circle me-3"></i>
+                                                <span class="text-white">13,977 Subscriber</span>
+                                            </a>
+                                            <a href="{{ about.instagram }}" class="w-100 rounded btn btn-dark d-flex align-items-center p-3 mb-2">
+                                                <i class="fab fa-instagram btn btn-light btn-square rounded-circle me-3"></i>
+                                                <span class="text-white">13,977 Follower</span>
+                                            </a>
+                                            <a href="{{ about.linkedin }}" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-4">
+                                                <i class="fab fa-linkedin btn btn-light btn-square rounded-circle me-3"></i>
+                                                <span class="text-white">13,977 Subscriber</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="my-4">Ijtimoiy yangiliklar</h4>
+                                    <div class="row g-4">
+
+                                        <div class="col-12">
+                                            {% for sport in sport_news %}
+                                                {% if forloop.counter == 1 %}
+                                                    <div class="row g-4 align-items-center features-item">
+                                                        <div class="col-4">
+                                                            <div class="rounded-circle position-relative">
+                                                                <div class="overflow-hidden rounded-circle">
+                                                                    <img src="{{ sport.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="image">
+                                                                </div>
+                                                                <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ sport.views }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="features-content d-flex flex-column">
+                                                                <p class="text-uppercase mb-2">Sport</p>
+                                                                <a href="{% url 'home:detail' sport.slug %}" class="h6">
+                                                                    {{ sport.title }}
+                                                                </a>
+                                                                <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ sport.created_at|date:'d-m-Y H:i' }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="col-12">
+                                            {% for texno in texnologiy_news %}
+                                                {% if forloop.counter == 1 %}
+                                                    <div class="row g-4 align-items-center features-item">
+                                                        <div class="col-4">
+                                                            <div class="rounded-circle position-relative">
+                                                                <div class="overflow-hidden rounded-circle">
+                                                                    <img src="{{ texno.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                                                </div>
+                                                                <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ texno.views }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="features-content d-flex flex-column">
+                                                                <p class="text-uppercase mb-2">Texnologiya</p>
+                                                                <a href="{% url 'home:detail' texno.slug %}" class="h6">
+                                                                    {{ texno.title }}
+                                                                </a>
+                                                                <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ texno.created_at|date:'d-m-Y H:i' }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="col-12">
+                                            {% for moda in moda_news %}
+                                                {% if forloop.counter == 1 %}
+                                                    <div class="row g-4 align-items-center features-item">
+                                                        <div class="col-4">
+                                                            <div class="rounded-circle position-relative">
+                                                                <div class="overflow-hidden rounded-circle">
+                                                                    <img src="{{ moda.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="image">
+                                                                </div>
+                                                                <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ moda.views }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="features-content d-flex flex-column">
+                                                                <p class="text-uppercase mb-2">Moda</p>
+                                                                <a href="{% url 'home:detail' moda.slug %}" class="h6">
+                                                                    {{ moda.title }}
+                                                                </a>
+                                                                <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ moda.created_at|date:'d-m-Y H:i' }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <div class="col-12">
+                                            {% for day in day_news %}
+                                                {% if forloop.counter == 1 %}
+                                                    <div class="row g-4 align-items-center features-item">
+                                                        <div class="col-4">
+                                                            <div class="rounded-circle position-relative">
+                                                                <div class="overflow-hidden rounded-circle">
+                                                                    <img src="{{ day.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="image">
+                                                                </div>
+                                                                <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ day.views }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="features-content d-flex flex-column">
+                                                                <p class="text-uppercase mb-2">Kundalik yangilik</p>
+                                                                <a href="{% url 'home:detail' day.slug %}" class="h6">
+                                                                    {{ day.title }}
+                                                                </a>
+                                                                <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ day.created_at|date:'d-m-Y H:i'  }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- tags -->
+                                        <div class="col-lg-12">
+                                            <div class="border-bottom my-3 pb-3">
+                                                <h4 class="mb-0">Taglar</h4>
+                                            </div>
+                                            <ul class="nav nav-pills d-inline-flex text-center mb-4">
+                                                {% for tag in tags %}
+                                                    <li class="nav-item mb-3">
+                                                        <a class="d-flex py-2 bg-light rounded-pill me-2" href="/home/search?query={{ tag.name }}">
+                                                            <span class="text-dark link-hover" style="width: 90px;">{{ tag.name }}</span>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            {% for ads in ads_one %}
+                                                <div class="position-relative banner-2">
+                                                    <img src="{{ ads.image.url }}" class="img-fluid w-100 rounded" alt="image">
+                                                    <div class="text-center banner-content-2">
+                                                        <h6 class="mb-2">your description</h6>
+                                                        <p class="text-white mb-2"></p>
+                                                        <a href="{{ ads.link }}" class="btn btn-primary text-white px-4">Visit Site</a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Most Populer News End -->
+
+{% endblock content %}

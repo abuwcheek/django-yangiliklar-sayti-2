@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+detail page
+{% endblock title %}
+
+
+{% block menu %}
+    <a href="{% url 'home:home' %}" class="nav-item nav-link ">Home</a>
+    {% for category in kategoriyalar %}
+        <a href="{% url 'home:category' category.slug %}" class="nav-item nav-link">{{ category.name }}</a>
+    {% endfor %}
+
+    <a href="{% url 'home:contact' %}" class="nav-item nav-link">Contact Us</a>
+{% endblock menu %}
+
+{% block content %}
+
+        <!-- Single Product Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <ol class="breadcrumb justify-content-start mb-4">
+                <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
+                <!-- <li class="breadcrumb-item"><a href="{% url 'home:category' news.slug %}">Category</a></li> -->
+                <li class="breadcrumb-item active text-dark">Detail Page</li>
+            </ol>
+            <br>
+            <hr>
+            
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="mb-4">
+                        <h3 class="h1 display-5">{{ news.title }}</h3>
+                    </div>
+                    <div class="position-relative rounded overflow-hidden mb-3">
+                        <img src="{{ news.image.url }}" class="img-zoomin img-fluid rounded w-100" alt="">
+                        <div class="position-absolute text-white px-4 py-2 bg-primary rounded" style="top: 20px; right: 20px;">                                              
+                            {{ news.category }}
+                        </div>
+                    </div>
+                        <h6 class="text-dark link-hover me-3"><i class="fa fa-clock"></i>Date: {{ news.created_at }}</h6>
+                        <h6 class="text-dark link-hover me-3"><i class="fa fa-eye"></i>Views: {{ news.views }}</h6>
+
+                        <p>{{ news.body | safe }}</p>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="p-3 rounded border">
+                                <h4 class="mb-4">Mashhur Categoriyalar</h4>
+                                <div class="row g-2">
+                                    {% for kategory in kategoriyalar %}
+                                        <div class="col-12">
+                                            <a href="{% url 'home:category' kategory.slug %}" class="link-hover btn btn-light w-100 rounded text-uppercase text-dark py-3">
+                                                {{ kategory.name }}
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <br>
+                                <hr>
+                                <h4 class="my-4">Ijtimoiy tarmoqlar</h4>
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <a href="{{ about.facebook }}" class="w-100 rounded btn btn-primary d-flex align-items-center p-3 mb-2">
+                                            <i class="fab fa-facebook-f btn btn-light btn-square rounded-circle me-3"></i>
+                                            <span class="text-white">13,977 Fans</span>
+                                        </a>
+                                        <a href="{{ about.twitter }}" class="w-100 rounded btn btn-danger d-flex align-items-center p-3 mb-2">
+                                            <i class="fab fa-twitter btn btn-light btn-square rounded-circle me-3"></i>
+                                            <span class="text-white">13,977 Follower</span>
+                                        </a>
+                                        <a href="{{ about.youtube }}" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-2">
+                                            <i class="fab fa-youtube btn btn-light btn-square rounded-circle me-3"></i>
+                                            <span class="text-white">13,977 Subscriber</span>
+                                        </a>
+                                        <a href="{{ about.instagram }}" class="w-100 rounded btn btn-dark d-flex align-items-center p-3 mb-2">
+                                            <i class="fab fa-instagram btn btn-light btn-square rounded-circle me-3"></i>
+                                            <span class="text-white">13,977 Follower</span>
+                                        </a>
+                                        <a href="{{ about.linkedin }}" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-4">
+                                            <i class="fab fa-linkedin btn btn-light btn-square rounded-circle me-3"></i>
+                                            <span class="text-white">13,977 Subscriber</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <br>
+                                <h4 class="my-4">Mashhur yangiliklar</h4>
+                                <div class="row g-4">
+                                    
+                                    <div class="col-12">
+                                        {% for sport in sport_news %}
+                                            {% if forloop.counter == 1 %}
+                                                <div class="row g-4 align-items-center features-item">
+                                                    <div class="col-4">
+                                                        <div class="rounded-circle position-relative">
+                                                            <div class="overflow-hidden rounded-circle">
+                                                                <img src="{{ sport.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                                            </div>
+                                                            <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ sport.views }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="features-content d-flex flex-column">
+                                                            <p class="text-uppercase mb-2">Sport</p>
+                                                            <a href="{% url 'home:detail' sport.slug %}" class="h6">
+                                                                {{ sport.title }}
+                                                            </a>
+                                                            <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ sport.created_at|date:'d-m-Y H:i' }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {% for texno in texnologiy_news %}
+                                            {% if forloop.counter == 1 %}
+                                                <div class="row g-4 align-items-center features-item">
+                                                    <div class="col-4">
+                                                        <div class="rounded-circle position-relative">
+                                                            <div class="overflow-hidden rounded-circle">
+                                                                <img src="{{ texno.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                                            </div>
+                                                            <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ texno.views }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="features-content d-flex flex-column">
+                                                            <p class="text-uppercase mb-2">Texnologiya</p>
+                                                            <a href="{% url 'home:detail' texno.slug %}" class="h6">
+                                                                {{ texno.title }}
+                                                            </a>
+                                                            <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ texno.created_at|date:'d-m-Y H:i' }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {% for moda in moda_news %}
+                                            {% if forloop.counter == 1 %}
+                                                <div class="row g-4 align-items-center features-item">
+                                                    <div class="col-4">
+                                                        <div class="rounded-circle position-relative">
+                                                            <div class="overflow-hidden rounded-circle">
+                                                                <img src="{{ moda.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                                            </div>
+                                                            <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ moda.views }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="features-content d-flex flex-column">
+                                                            <p class="text-uppercase mb-2">Moda</p>
+                                                            <a href="{% url 'home:detail' moda.slug %}" class="h6">
+                                                                {{ moda.title }}
+                                                            </a>
+                                                            <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ moda.created_at|date:'d-m-Y H:i' }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="col-12">
+                                        {% for day in day_news %}
+                                            {% if forloop.counter == 1 %}
+                                                <div class="row g-4 align-items-center features-item">
+                                                    <div class="col-4">
+                                                        <div class="rounded-circle position-relative">
+                                                            <div class="overflow-hidden rounded-circle">
+                                                                <img src="{{ day.image.url }}" class="img-zoomin img-fluid rounded-circle w-100" alt="">
+                                                            </div>
+                                                            <span class="rounded-circle border border-2 border-white bg-primary btn-sm-square text-white position-absolute" style="top: 10%; right: -10px;">{{ day.views }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="features-content d-flex flex-column">
+                                                            <p class="text-uppercase mb-2">Kundalik yangilik</p>
+                                                            <a href="{% url 'home:detail' day.slug %}" class="h6">
+                                                                {{ day.title }}
+                                                            </a>
+                                                            <small class="text-body d-block"><i class="fas fa-calendar-alt me-1"></i>{{ day.created_at|date:'d-m-Y H:i' }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <br>
+                                    <hr>
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom my-3 pb-3">
+                                            <h4 class="mb-0">Taglar</h4>
+                                        </div>
+                                        <ul class="nav nav-pills d-inline-flex text-center mb-4">
+                                            {% for tag in tags %}
+                                                <li class="nav-item mb-3">
+                                                    <a class="d-flex py-2 bg-light rounded-pill me-2" href="#">
+                                                        <span class="text-dark link-hover" style="width: 90px;">{{ tag.name }}</span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        {% for ads in ads_one %}
+                                            <div class="position-relative banner-2">
+                                                <img src="{{ ads.image.url }}" class="img-fluid w-100 rounded" alt="image">
+                                                <div class="text-center banner-content-2">
+                                                    <h6 class="mb-2">your description</h6>
+                                                    <p class="text-white mb-2"></p>
+                                                    <a href="{{ ads.link }}" class="btn btn-primary text-white px-4">Visit Site</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Single Product End -->
+
+      
+
+
+          
+{% endblock content %}

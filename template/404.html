@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Error page
+{% endblock title %}
+
+
+{% block menu %}
+    <a href="{% url 'home:home' %}" class="nav-item nav-link ">Home</a>
+    {% for category in kategoriyalar %}
+        <a href="{% url 'home:category' category.slug %}" class="nav-item nav-link">{{ category.name }}</a>
+    {% endfor %}
+
+    <a href="{% url 'home:contact' %}" class="nav-item nav-link">Contact Us</a>
+{% endblock menu %}
+
+
+{% block content %}
+
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="fof">
+        <div class="main">
+            <b><h1>Error Page!</h1></b><br>
+            <h2>Bunday sahifa topilmadi.</h2>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+{% endblock content %}
