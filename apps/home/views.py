@@ -131,23 +131,6 @@ class AboutView(View):
 
 from itertools import chain
 
-# class SearchView(View):
-#     def get(self, request):
-#         query=request.GET.get('query')
-#         if not query:
-#             return redirect('home:home')
-
-#         tag=get_object_or_404(Tag, name=query)
-#         new=New.objects.all().filter(Q(title__icontains = query) | Q(body__icontains = query)).order_by('-id')
-#         tag_news=tag.new_set.all()
-#         result_list=list(chain(tag_news, new))
-
-#         context={
-#             'searchnews': result_list,
-#         }
-#         return render(request, 'search.html', context)
-
-
 class SearchView(View):
     def get(self, request):
         query=request.GET.get('query')
@@ -156,9 +139,6 @@ class SearchView(View):
             return redirect('home:home')
         
         news = New.objects.all().filter( Q(title__icontains = query) | Q(body__icontains = query))
-        # tag=get_object_or_404(Tags, name=query)
-        # tag_news= tag.new_set.all()
-        # result_list = list(chain(tag_news, news))
         context={
             "searchnews":news,
         }
