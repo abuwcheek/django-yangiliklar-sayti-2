@@ -138,7 +138,11 @@ class SearchView(View):
         if not query:
             return redirect('home:home')
         
+        tag=get_object_or_404(Tag, name=query)
         news = New.objects.all().filter( Q(title__icontains = query) | Q(body__icontains = query))
+        tag_news=tag.new_set.all()
+        result_list=list(chain(tag_news, new))
+        
         context={
             "searchnews":news,
         }
