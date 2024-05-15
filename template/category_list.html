@@ -23,7 +23,7 @@ category page
     <ol class="breadcrumb justify-content-start mb-4">
         <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
         <!-- <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
-        <li class="breadcrumb-item active text-dark">Category list</li>
+        <li class="breadcrumb-item active text-dark">{{ ctg.name }}</li>
     </ol>
     <br>
     <h1> {{ ctg.name }} - Categoriyasi</h1>
