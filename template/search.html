@@ -36,14 +36,14 @@ search page
 </div>
     
 
-{% for yangi in searchnews %}
+{% for new in searchnews %}
 
     <div class="container">
-        <a href="{% url 'home:detail' yangi.slug %}">
-            <h3><b>{{ yangi.title }}</b></h3>
-            <img src="{{ yangi.image.url }}" alt="image" style="width: 700px; height: 500px;">
+        <a href="{% url 'home:detail' new.slug %}">
+            <h3><b>{{ new.title }}</b></h3>
+            <img src="{{ new.image.url }}" alt="image" style="width: 700px; height: 500px;">
         </a>
-        <b><p>Date: {{ yangi.created_at|date:'d-m-Y H:i' }} | Views: {{ yangi.views }}</p></b>
+        <b><p>Date: {{ new.created_at|date:'d-m-Y H:i' }} | Views: {{ new.views }}</p></b>
         <hr>
         <br>
         <br>

@@ -22,7 +22,7 @@ detail page
         <div class="container py-5">
             <ol class="breadcrumb justify-content-start mb-4">
                 <li class="breadcrumb-item"><a href="{% url 'home:home' %}">Home</a></li>
-                <!-- <li class="breadcrumb-item"><a href="{% url 'home:category' news.slug %}">Category</a></li> -->
+                <li class="breadcrumb-item active text-dark"><a href="{% url 'home:category' news.category.slug %}">{{ news.category.name }}</a></li>
                 <li class="breadcrumb-item active text-dark">Detail Page</li>
             </ol>
             <br>
